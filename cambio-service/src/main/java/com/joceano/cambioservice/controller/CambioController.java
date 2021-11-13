@@ -24,10 +24,7 @@ public class CambioController {
     private CambioRepository repository;
 
     @GetMapping("/{amount}/{from}/{to}")
-    public Cambio getCambio(
-            @PathVariable("amount") BigDecimal amount,
-            @PathVariable("from") String from,
-            @PathVariable("to") String to) {
+    public Cambio getCambio(@PathVariable("amount") BigDecimal amount, @PathVariable("from") String from, @PathVariable("to") String to) {
         var cambio = repository.findByFromAndTo(from, to);
         if (Objects.isNull(cambio))
             throw new RuntimeException("Currency Unsupported");

@@ -16,9 +16,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
-
-flyway:
-  url: jdbc:mysql://localhost:3306/
-  schemas: cambio-service
-  user: root
-  password: root
+  flyway:
+    url: jdbc:mysql://localhost:3306/
+    schemas: cambio-service
+    user: root
+    password: root
