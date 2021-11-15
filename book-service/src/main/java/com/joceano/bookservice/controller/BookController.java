@@ -1,6 +1,7 @@
 package com.joceano.bookservice.controller;
 
 import com.joceano.bookservice.model.Book;
+import com.joceano.bookservice.proxy.CambioProxy;
 import com.joceano.bookservice.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -21,13 +22,18 @@ public class BookController {
     @Autowired
     private BookRepository repository;
 
+    @Autowired
+    private CambioProxy proxy;
+
     @GetMapping("/{id}/{currency}")
     public Book findBook(@PathVariable("id") Long id, @PathVariable("currency") String currency) {
         var book = repository.getById(id);
         if (Objects.isNull(book))
             throw new RuntimeException("Book not found");
+        var cambio = proxy.getCambio(book.getPrice(), "USD", currency);
         var port = environment.getProperty("local.server.port");
         book.setEnvironment(port);
+        book.setPrice(cambio.getConvertedValue());
         return book;
     }
 }
