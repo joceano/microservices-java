@@ -7,6 +7,9 @@ eureka:
       defaultZone: http://localhost:8761/eureka
 
 spring:
+  sleuth:
+    sampler:
+      probability: 1.0 #100%, mas o ideal é 5%
   application:
     name: api-gateway
   cloud:

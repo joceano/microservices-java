@@ -26,6 +26,9 @@ spring:
     schemas: cambio-service
     user: root
     password: root
+  sleuth:
+    sampler:
+      probability: 1.0 #100%, mas o ideal é 5%
 
 springdoc:
   show-actuator: true
